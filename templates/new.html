@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    New Activity
+{% endblock %}
+
+{% block main %}
+        <form action="/new" method="post" class = "new">
+        <div class="limiter">
+		<div class="container-login1000">
+			<div class="wrap-login1000 p-t-50 p-b-90">
+					<span class="login100-form-title p-b-51">
+						Create New Activity
+					</span>
+                    <br />
+                    <div class="wrap-input100">
+						<input required autofocus class="input100" name="name" placeholder="Activity Name" type="text">
+						<span class="focus-input100" id = "purple"></span>
+					</div>
+					<br />
+
+					<div class="wrap-input100">
+						<input required autofocus class="input100" name="goal" placeholder="Total Hours Goal" type="number">
+						<span class="focus-input100" id = "purple"></span>
+					</div>
+
+                    <br />
+
+					<div class="container-login100-form-btn m-t-17">
+						<button class="login100-form-btn" id="purple" class="btn btn-primary" type="submit">Create Activity</button>
+					</div>
+
+			</div>
+		</div>
+	</div>
+
+    </form>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log
+{% endblock %}
+
+{% block main %}
+
+    <form action="/log" method="post" class = "new">
+        <div class="limiter">
+		<div class="container-login1000">
+			<div class="wrap-login1000 p-t-50 p-b-90">
+					<span class="login100-form-title p-b-51">
+						Log Session
+					</span>
+                    <br />
+
+					<select name="active">
+					    <option value="">Select Activity</option>
+                        {% for row in rows %}
+                            <option value="{{ row.activity }}"/> {{ row["activity"] }} </option>
+                        {% endfor %}
+                    </select>
+                    <br />
+                    <br />
+
+					<input autocomplete="off"   autofocus class="form-control" name="hour" placeholder="Hours" type="number"/>
+                    <input autocomplete="off"  class="form-control" name="minutes" placeholder="Minutes" type="number"/>
+
+                    <br />
+                    <br />
+                    <br />
+
+					<div class="container-login100-form-btn m-t-17">
+						<button class="login100-form-btn" id="green" class="btn btn-primary" type="submit">Log</button>
+					</div>
+
+			</div>
+		</div>
+	</div>
+
+    </form>
+
+{% endblock %}

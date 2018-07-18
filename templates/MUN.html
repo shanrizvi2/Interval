@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title> </title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.dropotron.min.js"></script>
+		<script src="js/jquery.scrollgress.min.js"></script>
+		<script src="js/jquery.scrolly.min.js"></script>
+		<script src="js/jquery.slidertron.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"/>
+
+        <link href="/static/styles.css" rel="stylesheet"/>
+
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+		<link href="/static/style.css" rel="stylesheet"/>
+		<link href="/static/css/style-xlarge.css" rel="stylesheet"/>
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+		<header id="header" class="skel-layers-fixed">
+			<nav id="nav" class ="hi">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="Insight.html">Insight</a></li>
+					<li><a href="MUN.html">MUN</a></li>
+					<li><a href="Debate.html">Debate</a></li>
+					<li><a href="contact.html">Contact Me</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<form action="/log" method="post" class="form">
+        	<select name="active">
+            	{% for row in rows %}
+                	<option value="{{ row.activity }}"/> {{ row["activity"] }} </option>
+            	{% endfor %}
+        	</select>
+        	<br />
+        	<br />
+        	<input autocomplete="off"  autofocus class="form-control" name="hour" placeholder="Hours" type="numeric"/>
+        	<input autocomplete="off" class="form-control" name="minutes" placeholder="Minutes" type="numeric"/>
+        	<br />
+        	<br />
+        	<button class="btn btn-primary" type="submit">Log</button>
+        </form>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<ul class="icons">
+				<li><a href="https://www.facebook.com/shanrizvi4" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+				<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+				<li><a href="#" class="icon fa-envelope"><span class="label">Envelope</span></a></li>
+			</ul>
+			<span class="copyright">
+				&copy; Copyright. All rights reserved.</a>
+			</span>
+		</footer>
+
+	</body>
+</html>
