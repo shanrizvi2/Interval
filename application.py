@@ -102,21 +102,21 @@ def index():
 @login_required
 def dash():
     activities = db.execute("SELECT * FROM activities WHERE id = :id", id=session["user_id"])
-    data = db.execute("SELECT * FROM log WHERE id = :id", id=session["user_id"])
-    array = []
+    hour = []
+    Day = []
 
     for activities in activities:
         for i in reversed(range(7)):
             day = datetime.datetime.now() - datetime.timedelta(days = i)
-            print (day)
             check = db.execute("SELECT * FROM log WHERE id = :id AND activity = :activity AND date = :date", id=session["user_id"], activity=activities["activity"], date=day)
             if not check:
-                array.append(0)
+                hour.append(0)
             else:
-                array.append(int(check[0]["hours"]))
-    print(array)
+                hour.append(int(check[0]["hours"]))
+            Day.append(day)
+    print(Day)
     activities = db.execute("SELECT * FROM activities WHERE id = :id", id=session["user_id"])
-    return render_template("dash.html", rows=activities, data = data, array = array)
+    return render_template("dash.html", rows=activities, array = hour, day = Day)
 
 
 @app.route("/new", methods=["GET", "POST"])

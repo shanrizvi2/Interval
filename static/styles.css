@@ -484,6 +484,11 @@ p {
 	margin-left: 70px;
 }
 
+.hide
+{
+	display: none;
+}
+
 /* Log In */
 
 
