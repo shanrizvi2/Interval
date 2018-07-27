@@ -102,8 +102,21 @@ def index():
 @login_required
 def dash():
     activities = db.execute("SELECT * FROM activities WHERE id = :id", id=session["user_id"])
-    data = db.execute("SELECT hours FROM log WHERE id = :id", id=session["user_id"])
-    return render_template("dash.html", rows=activities, data = data)
+    data = db.execute("SELECT * FROM log WHERE id = :id", id=session["user_id"])
+    array = []
+
+    for activities in activities:
+        for i in reversed(range(7)):
+            day = datetime.datetime.now() - datetime.timedelta(days = i)
+            print (day)
+            check = db.execute("SELECT * FROM log WHERE id = :id AND activity = :activity AND date = :date", id=session["user_id"], activity=activities["activity"], date=day)
+            if not check:
+                array.append(0)
+            else:
+                array.append(int(check[0]["hours"]))
+    print(array)
+    activities = db.execute("SELECT * FROM activities WHERE id = :id", id=session["user_id"])
+    return render_template("dash.html", rows=activities, data = data, array = array)
 
 
 @app.route("/new", methods=["GET", "POST"])
@@ -154,6 +167,14 @@ def log():
         else:
             totHours = curLog[0]["hours"] + time
             db.execute("UPDATE log SET hours=:hours WHERE id = :id AND activity = :activity AND date=:date", hours=totHours, id = session["user_id"], activity=activity, date= datetime.date.today())
+
+        total = db.execute("SELECT * FROM activities WHERE id = :id AND activity = :activity", id = session["user_id"], activity=activity)
+        if total[0]["total"] is None:
+            totalHours = time
+        else:
+            totalHours = total[0]["total"] + time
+
+        db.execute("UPDATE activities SET total=:total WHERE id = :id AND activity = :activity", total=totalHours, id = session["user_id"], activity=activity)
 
         db.execute("INSERT INTO history (id, activity, hours, minutes) VALUES(:id, :activity, :hours, :minutes)", id=session["user_id"], activity=activity, hours=hour, minutes=minutes)
 

@@ -469,10 +469,10 @@ p {
 /* Graph */
 .graph
 {
-	width: 500px;
+	width: 600px;
 	margin-left: 200px;
 }
-.dash
+.dash, .type
 {
 	font-family: Avenir;
     padding-top: 30px;
@@ -887,3 +887,4 @@ table th {
   top: 0;
   width: 100%
 }
+
