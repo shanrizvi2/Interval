@@ -1,4 +1,5 @@
 import os
+import math
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
@@ -104,7 +105,6 @@ def dash():
     activities = db.execute("SELECT * FROM activities WHERE id = :id", id=session["user_id"])
     hour = []
     Day = []
-
     for activities in activities:
         for i in reversed(range(7)):
             day = datetime.datetime.now() - datetime.timedelta(days = i)
@@ -114,7 +114,7 @@ def dash():
             else:
                 hour.append(int(check[0]["hours"]))
             Day.append(day)
-    print(Day)
+    print(hour)
     activities = db.execute("SELECT * FROM activities WHERE id = :id", id=session["user_id"])
     return render_template("dash.html", rows=activities, array = hour, day = Day)
 
@@ -173,7 +173,7 @@ def log():
             totalHours = time
         else:
             totalHours = total[0]["total"] + time
-
+        totalHours = round(totalHours,2)
         db.execute("UPDATE activities SET total=:total WHERE id = :id AND activity = :activity", total=totalHours, id = session["user_id"], activity=activity)
 
         db.execute("INSERT INTO history (id, activity, hours, minutes) VALUES(:id, :activity, :hours, :minutes)", id=session["user_id"], activity=activity, hours=hour, minutes=minutes)
